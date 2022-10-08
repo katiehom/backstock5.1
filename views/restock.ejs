@@ -1,0 +1,117 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+<body>
+<section class="table-container shadow-lg">
+    <h2 class="table-label restock-label">Restock Shopping List</h2>
+    <div class="myInput-container">
+        <input id='myRestockInput' onkeyup='searchTable()' type='text' placeholder="Search List" class="shadow text-center">
+    </div>
+    <table 
+        id="restockTable"
+        class="table table-sm table-dark table-hover shadow table-sortable">
+        <thead>
+        <tr>
+            <th></th>
+            <th class="sort restock-col-label">Brand</th>
+            <th class="sort restock-col-label">Description</th>
+            <th class="sort restock-col-label">
+                <span class="restock-mobile-hide quantity-head restock-col-label">Quantity</span>
+                <span class="restock-mobile-show restock-col-label mx-5">#</span>
+            </th>
+            <th class="sort restock-col-label">Store</th>
+            <!-- <th class="mobile-hide width-hide restock-col-label">Comments</th> -->
+            <th class="restock-col-label text-center"><i class="fa-solid fa-comment"></i></th>
+            <!-- <th class="restock-col-label"><i class="fa-solid fa-square-check"></i></th> -->
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% restockItem.forEach(el => {%>
+            <tr class="align-middle">   
+                <td class="restockItem pencil" data-id='<%=el._id%>'>
+                    <a href="/restock/editRestock/<%= el.id %>/" class="fa fa-pen-to-square pencil-btn-restock">
+                    </a>
+                </td>
+                <td class="restockItem" data-id='<%=el._id%>'>
+                    <span><%= el.brand %></span>
+                </td>
+                <td class="restockItem" data-id='<%=el._id%>'>
+                    <span><%= el.description %></span>
+                </td>
+                <td class="restockItem quantity-box" data-id='<%=el._id%>'>
+                    <form
+                        class="quantityForm d-inline"
+                        action="/restock/decrRestock/<%= el.id %>?_method=PUT"
+                        method="POST"
+                    >
+                        <button class="noButton" type="submit">
+                            <i class="fa fa-minus-circle restockMinus"></i>
+                        </button>
+                    </form>
+                    <span class="quantityNum text-center"><%= el.quantity %></span>
+                    <form
+                        class="quantityForm d-inline"
+                        action="/restock/incrRestock/<%= el.id %>?_method=PUT"
+                        method="POST"
+                    >
+                        <button class="noButton" type="submit">
+                            <i class="fa fa-plus-circle restockPlus"></i>
+                        </button>
+                    </form>
+                </td>
+                <td class="restockItem" data-id='<%=el._id%>'>
+                    <span><%= el.store %></span>
+                </td>
+                <td class="restockItem" data-id='<%=el._id%>'>
+                    <span><%= el.comments %></span>
+                </td>
+                <!-- Add functionality to toggle item class/appearance -->
+                <!-- <td class="align-middle"><input type="checkbox"></td> -->
+                <td>
+                    <!-- Button trigger modal -->
+                    <button class="noButton" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa fa-trash-can restockDelete"></i>
+                    </button>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</section>
+
+<div class="text-center">
+    <a href="/restock/addRestock"
+        class="btn btn-warning mb-3 new-restock-btn shadow">
+        Add New Restock Item
+    </a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm: Delete Restock Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          Are you sure you want to delete this item?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary modal-btn mx-3" data-bs-dismiss="modal">Cancel</button>
+          <form
+            action="/restock/deleteRestock/<%= restockItem.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+            >
+            <button type="submit" class="btn btn-outline-danger modal-btn">Delete</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<%- include('partials/footer') %>
+
+

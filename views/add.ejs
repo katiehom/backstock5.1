@@ -1,0 +1,80 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+
+<body>
+    <div class="container input-container mt-5 col-lg-8">
+        <h2 class="text-center mb-3">Enter Backstock Item Info</h2>
+        <form action="/todos/createTodo" method='POST'>
+            <div class="form-floating mb-3">
+                <select class="form-select shadow text-center" id="floatingCategory" required name="category">
+                    <option value="" disabled selected>Select One...</option>
+                    <option value="Frozen">Frozen</option>
+                    <option value="Health & Beauty">Health & Beauty</option>
+                    <option value="Household & Cleaning">Household & Cleaning</option>
+                    <option value="Pantry">Pantry</option>
+                    <option value="Refrigerated">Refrigerated</option>
+                    <option value="Shoes & Clothing">Shoes & Clothing</option>
+                    <option value="Toys">Toys</option>
+                    <option value="Other">Other</option>
+                </select>
+                <label for="floatingCategory">Category *</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control shadow text-center" id="floatingBrand" placeholder="Brand" name='brand'>
+                <label for="floatingBrand">Brand *</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control shadow text-center" id="floatingDescription" placeholder="Description" name='description'>
+                <label for="floatingDescription">Description *</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control shadow text-center" id="floatingLocation" placeholder="Storage Location" name='storageLocation'>
+                <label for="floatingLocation">Storage Location</label>
+            </div>
+            <div class="d-flex justify-content-center quantity-row">
+                <div class="quantity-increment d-inline-flex align-items-center justify-content-center col">
+                    <div class="minus">
+                        <i class="fa fa-minus-circle" id="quantityMinus"></i>
+                    </div>
+                    <div class="form-floating mb-3 col-5">
+                        <input type="number" required min="0" value="0" step="1" class="form-control shadow quantity-input text-center" id="floatingQuantity" placeholder="Quantity" name='quantity'>
+                        <label for="floatingQuantity"> Quantity *</label>
+                    </div>
+                    <div class="plus">
+                        <i class="fa fa-plus-circle" id="quantityPlus"></i>
+                    </div>
+                </div>
+                <div class="quantity-increment d-inline-flex align-items-center justify-content-center col">
+                    <div class="minus">
+                        <i class='fa fa-minus-circle' id="idealQuantityMinus"></i>
+                    </div>
+                    <div class="form-floating mb-3 col-5">
+                        <input type="number" required min="0" value="0" step="1" class="form-control shadow quantity-input text-center" id="floatingIdealQuantity" placeholder="Ideal Quantity" name='idealQuantity' class="hidden">
+                        <label for="floatingIdealQuantity">Ideal Quantity *</label>
+                    </div>
+                    <div class="plus">
+                        <i class='fa fa-plus-circle' id="idealQuantityPlus"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control shadow text-center" id="floatingSize" placeholder="Size" name='size'>
+                <label for="floatingSize">Size</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control shadow text-center" id="floatingExpirationDate" placeholder="Expiration Date" name='expirationDate'>
+                <label for="floatingExpirationDate">Expiration Date</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control text-center shadow" type="text" name="comments" placeholder="Comments" id="floatingComments" style="height: 100px">
+                <label for="floatingComments">Comments</label>
+                </div>
+                <p class="text-white text-center required-text mt-2">* indicates required field</p>
+            <div class="d-flex flex-row justify-content-center mt-3" id="newBackstockButtons">
+                <a href="/todos" class="btn btn-lg btn-secondary shadow mx-3" id="newBackstockCancel">Cancel</a>
+                <button type="submit" id="newBackstockSubmit" class="btn btn-lg btn-primary shadow mx-3" data-dismiss="modal">Submit</button>
+            </div>
+        </form>
+    </div>
+
+<%- include('partials/footer') %>

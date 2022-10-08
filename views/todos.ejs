@@ -1,0 +1,83 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+<body>
+<section class="table-container shadow-lg">
+    <h2 class="table-label"><%= user.userName %>'s Backstock</h2>
+    <div class="myInput-container">
+        <input id='myInput' onkeyup='searchTable()' type='text' placeholder="Search Backstock" class="shadow text-center">
+    </div>
+    <table 
+        id="myTable"
+        class="table table-sm table-dark table-hover shadow table-sortable">
+        <thead>
+        <tr>
+            <th></th>
+            <th class="sort">Category</th>
+            <th class="sort">Brand</th>
+            <th class="sort">Description</th>
+            <th class="sort">
+              <span class="mobile-hide">Storage</span>
+                    Location
+            </th>
+            <th class="sort">
+                <span class="mobile-hide quantity-head">Quantity</span>
+                <span class="mobile-show">#</span>
+            </th>
+            <th class="sort mobile-hide">Ideal Quantity</th>
+            <th class="mobile-hide width-hide">Size</th>
+            <th class="sort mobile-hide width-hide expiration-head">Expiration</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% todos.forEach(el => {%>
+            <tr class='<%= el.quantity === 0 || el.quantity < el.idealQuantity ? 'restock' : ''%>'>   
+                <td class="todoItem pencil" data-id='<%=el._id%>'>
+                    <a href="/todos/edit/<%= el.id %>/" class="fa fa-pen-to-square pencil-btn">
+                    </a>
+                </td>
+                <td class="todoItem" data-id='<%=el._id%>'>
+                    <span><%= el.category %></span>
+                </td>
+                <td class="todoItem" data-id='<%=el._id%>'>
+                    <span><%= el.brand %></span>
+                </td>
+                <td class="todoItem" data-id='<%=el._id%>'>
+                    <span class='<%= dayjs(el.expirationDate).isBefore(dayjs()) ? 'expired' : ''%>'><%= el.description %></span>
+                </td>
+                <td class="todoItem" data-id='<%=el._id%>'>
+                    <span><%= el.storageLocation %></span>
+                </td>
+                <td class="todoItem quantity-box" data-id='<%=el._id%>'>
+                    <span><%= el.quantity %></span>
+                </td>
+                <td class="todoItem mobile-hide" data-id='<%=el._id%>'>
+                    <span><%= el.idealQuantity %></span>
+                </td>
+                <td class="todoItem mobile-hide width-hide size" data-id='<%=el._id%>'>
+                    <span><%= el.size %></span>
+                </td>
+                <td class='todoItem mobile-hide width-hide expiration' data-id='<%=el._id%>'>
+                    <% if (el.expirationDate) { %>
+                        <span class='<%= dayjs(el.expirationDate).isBefore(dayjs()) ? 'expired' : ''%>'><%= dayjs(el.expirationDate).format('MM/DD/YYYY') %></span>
+                    <%} else { %>
+                        <span class="hidden">2005/12-04</span>
+                    <% } %>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center mb-3">
+        <span class="restock mx-3">&#9632; <small> Restock Item</small></span>
+        <span class="expired mx-3 text-center">&#9632; <small> Expired Item</small></span>
+    </div>
+</section>
+
+<div class="text-center">
+    <a href="/todos/add"
+        class="btn btn-warning mb-3 new-backstock-btn shadow">
+        Add New Backstock Item
+    </a>
+</div>
+
+<%- include('partials/footer') %>

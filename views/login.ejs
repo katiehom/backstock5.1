@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<body>
+    <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+    <% if (locals.messages.info) { %>
+        <% messages.info.forEach( el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+    <div class="login-container">
+        <img class="login-img" src="assets/profile.png" alt="Backstock">
+        <form action="/login" method="POST">
+            <div class="form-floating mb-5">
+                <input type="email" class="form-control login-input shadow" id="floatingEmail" placeholder="Email" name='email'>
+                <label for="floatingEmail">Email</label>
+            </div>
+            <div class="form-floating mb-2">
+                <input type="password" class="form-control login-input shadow password" id="floatingPassword" placeholder="Password" name='password'>
+                <i class="far fa-eye-slash password-eye" id="login"></i>
+            <label for="floatingPassword">Password</label>
+            </div>
+            <div class="text-center">
+                <input class="login-btn shadow" type="submit">
+            </div>
+        </form>
+    </div>
+
+<%- include('partials/footer') %>

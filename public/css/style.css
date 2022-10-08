@@ -1,0 +1,534 @@
+/**************** Main Content *****************/
+* {
+    box-sizing: border-box;
+}
+html, body {
+    height: 100vh;
+    width: 100vw;
+}
+body {
+    font-family: 'Kumbh Sans', sans-serif;
+    background: rgb(62,34,195);
+    background: linear-gradient(310deg, rgba(62,34,195) 0%, rgb(68, 255, 162) 100%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+h1 {
+    font-size: 5rem;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+h2 {
+    font-weight: 600;
+}
+h3 {
+    font-size: 2.5rem;
+    width: 90%;
+    max-width: 577px;
+}
+.required-text {
+    font-size: .8rem;
+    margin-bottom: 0;
+}
+.restock {
+    color: rgb(244, 207, 69);
+}
+.footer-span {
+    margin: 2rem 0 1rem 0;
+    font-size: .9rem;
+    color: white;
+}
+.footer-span a {
+    color: white;
+}
+.expired {
+    color: rgb(255, 67, 117);
+}
+/* footer {
+    height: 50px;
+    bottom: 0;
+    width: 100vw;
+} */
+.hidden {
+    display: none;
+}
+.navbar a {
+    max-width: 260px;
+}
+
+/**************** Containers *****************/
+.index-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.index-left {
+    width: 50%;
+}
+.index-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    gap: 3rem;
+}
+.login-container, .signup-container, .signup-container-edit {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.signup-container-edit {
+    margin-top: 5%;
+}
+.table-container {
+    border: 1px solid transparent;
+    border-radius: 25px;
+    background-color: rgb(34, 37, 41);
+    width: 100vw;
+    margin: 5% auto 0;
+}
+table {
+    width: 100vw;
+}
+thead {
+    width: 100vw;
+}
+tbody {
+    width: 100vw;
+    color: white;
+}
+tr {
+    border-bottom: 1px solid rgb(110, 110, 110);
+}
+.myInput-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.quantity-row {
+    display: flex;
+    flex-direction: column;
+}
+.minus, .plus {
+    position: relative;
+    top: -10px;
+}
+input.form-control, select.form-select, .form-control[type="text"], textarea.form-control {
+    border-radius: 36px;
+    background-color: white;
+}
+select.form-select{
+    padding-left: 30px;
+}
+#floatingExpirationDate {
+    padding-left: 30px;
+    padding-right: 10px;
+}
+input.form-control:not(:placeholder-shown) {
+    background-color:  white !important;
+}
+.input-container {
+    max-width: 500px;
+}
+.form-control::placeholder, .form-select::placeholder {
+    color: rgb(0, 0, 121);
+}
+.row {
+    --bs-gutter-x: .5rem;
+}
+.modal-content {
+    color:rgb(0, 0, 121);
+}
+.modal-content {
+    border-radius: 30px;
+}
+#newBackstockButtons, .editButtonRow {
+    padding-bottom: 10px;
+}
+.currentInfo-card {
+    padding: 1rem;
+    margin: 0 auto;
+    width: 50%;
+    border-radius: 30px;
+    background-color: rgb(50, 50, 50);
+    color: white;
+}
+.footer-div {
+    display: flex;
+    justify-content: center;
+}
+.restock-header {
+    color: #730089;
+}
+.fa-bars {
+    font-size: 1.5rem;
+}
+
+/**************** Table Content & Style *****************/
+.table-label {
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+}
+th {
+    border: none;
+    font-weight: 600;
+    color: rgb(108, 217, 191);
+}
+input + label, select + label, textarea + label, #floatingExpirationDate, #floatingCategory {
+    color: rgb(66, 79, 187);
+}
+input.internal.autofill.selected {
+    background-color: white;
+}
+#myInput, #myRestockInput {
+    border: 1px solid transparent;
+    border-radius: 20px; 
+    background-color: rgb(68, 69, 73);
+    caret-color: rgb(244, 207, 69);
+    color: white;
+}
+#myRestockInput {
+    caret-color: #e565ff;
+}
+#myInput::placeholder {
+    color: rgb(108, 217, 191);
+    font-size: .9rem;
+}
+#myRestockInput::placeholder {
+    color: rgb(108, 217, 191);
+}
+
+h2 {
+    clear: both;
+}
+.quantity-box, .quantity-head {
+    min-width: 120px;
+}
+.expiration, .size {
+    font-size: .8rem;
+    vertical-align: middle;
+}
+.restock-label, .restock-col-label, .fa-square-check, .fa-comment {
+    color:#eb86ff;
+}
+.quantityForm {
+    width: 30px;
+}
+.quantityNum {
+    width: 30px;
+}
+
+/**************** Buttons & Inputs *****************/
+.new-backstock-btn, .new-restock-btn {
+    margin: 2rem 0;
+    border: 1px solid transparent;
+}
+.new-backstock-btn:hover, .logout-btn:hover, .index-btn:hover, .login-btn:hover, #newBackstockSubmit:hover, #newRestockSubmit:hover {
+    background-color: rgb(235, 145, 59);
+}
+.new-backstock-btn:hover, .new-restock-btn:hover, .logout-btn:hover, .index-btn:hover, .login-btn:hover, #newBackstockSubmit:hover, #newRestockSubmit:hover, #newBackstockCancel:hover, #newRestockCancel:hover, #newBackstockDelete:hover, #newRestockDelete:hover {
+    border: 1px solid transparent;
+    color: black;
+    transform: translateY(3px);
+    box-shadow: 5px 10px 20px 2px rgba(0, 0, 0, 0.7);
+}
+.pencil-btn, .pencil-btn-restock {
+    padding: 0 2px;
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: #ff18d5;
+}
+.pencil-btn-restock {
+    color: #9318ff;
+}
+.trash-btn {
+    padding: 2px 4px 0 4px;
+}
+.logout-btn {
+    padding: 3px 10px;
+    float: right;
+    margin: 3% 3% 0 0;
+}
+.logout-btn, .new-backstock-btn, .new-restock-btn, .index-btn, .login-btn, #newBackstockSubmit, #newBackstockCancel, #newRestockSubmit, #newRestockCancel, #exportRestockBtn {
+    background-color: rgb(244, 207, 69);
+    border-radius: 20px;
+    border: 1px solid transparent;
+    color: black;
+    font-weight: 600;
+}
+#newRestockSubmit, .new-restock-btn, .new-restock-btn, #exportRestockBtn {
+    background-color: #e565ff;
+}
+.new-restock-btn:hover, #newRestockSubmit:hover, #exportRestockBtn:hover {
+    background-color: #a306c2;
+    color: white;
+}
+#exportRestockBtn {
+    border-radius: 30px;
+    margin-top: 1.5rem;
+}
+#newBackstockCancel, #newRestockCancel {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    margin: 0 5%;
+}
+#newBackstockCancel:hover, #newRestockCancel:hover {
+    background-color:rgb(75, 75, 75);
+    color: white;
+}
+#newBackstockCancel, #newRestockCancel, #newBackstockSubmit, #newRestockSubmit {
+    width: 150px;
+    align-self: flex-end;
+}
+#newBackstockCancel, #newRestockCancel, #newBackstockSubmit, #newRestockSubmit, #newBackstockDelete, #newRestockDelete, .modal-btn {
+    border-radius: 30px;
+    font-weight: 600;
+}
+#newBackstockDelete:hover, #newRestockDelete:hover {
+    color: white;
+}
+#newBackstockDelete, #newRestockDelete {
+    width: 75x;
+    align-self: flex-start;
+}
+#addToRestockBtn {
+    display: block;
+}
+.editButtonRow {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+.cancelSubmit-contaner {
+    flex-direction: row;
+}
+.index-btn {
+    text-decoration: none;
+    padding: 5px 10px;
+    width: 150px;
+    text-align: center;
+}
+.login-btn {
+    width: 150px;
+    padding: 5px 0;
+    margin: 0 auto;
+}
+i {
+    color: white;
+}
+.pencil, .trash {
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+}
+.login-input{
+    margin-bottom: 10%;
+    width: 275px;
+    border-radius: 20px;
+}
+.password-eye, .signup-password-eye {
+    position: relative; 
+    left: 240px; 
+    top: -68px; 
+    cursor: pointer;
+    color: rgb(87, 87, 203);
+}
+.password {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 2px;
+}
+.fa-minus-circle, .fa-plus-circle {
+    font-size: 2rem;
+    color: rgb(244, 207, 69);
+    padding: 8px;
+}
+.fa-minus-circle:hover, .fa-plus-circle:hover {
+    color: rgb(235, 145, 59);
+    cursor: pointer;
+}
+.restockPlus, .restockMinus {
+    font-size: 1.3rem;
+}
+.restockDelete {
+    font-size: 1.3rem;
+    margin-left: 0.25rem;
+    color: rgb(255, 67, 117);
+}
+.noButton {
+    background-color: transparent;
+    border: none;
+}
+
+/**************** Images *****************/
+.logo {
+    max-width: 300px;
+    /* margin: 2% 0 0 3%; */
+}
+.shelf-img {
+    width: 25vw;
+    min-width: 275.5px;
+}
+.login-img {
+    width: 300px;
+    margin-bottom: 2rem;
+}
+
+/**************** Hidden Content *****************/
+.mobile-show, .restock-mobile-show {
+    display: none;
+}
+
+/**************** Media Queries *****************/
+@media screen and (min-width: 1801px) {
+    .table-container {
+        width: 75%;
+    }
+}
+@media screen and (max-width: 1800px) {
+    .table-container {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 1450px) {
+    .btn, table, thead {
+        font-size: .9rem;
+    }
+    .table-container {
+        width: 95%;
+    }
+    
+}
+@media screen and (max-width: 1250px) {
+    .width-hide {
+        display: none
+    }
+    .table-container {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 1152px){
+    .mobile-hide {
+        display: none;
+    }    
+    .mobile-show {
+        display: inline;
+    }
+    .index-container {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10%;
+        width: 100%;
+    }
+    .index-header {
+        text-align: center;
+        font-size: 4rem;
+    }
+    h3 {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 35px;
+        font-size: 2rem;
+    }
+}
+@media screen and (max-width: 1074px){
+    .table-container {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 992px) {
+    .currentInfo-card {
+        width: 75%;
+    }
+}
+@media screen and (max-width: 767px) {
+    #newBackstockCancel, #newBackstockSubmit {
+        width: 20vw;
+        border-radius: 30px;
+        font-weight: 600;
+    }
+}
+@media screen and (max-width: 835px){
+    .new-backstock-btn, .logout-btn, table, thead {
+        font-size: .9rem;
+    }
+    .logo {
+        margin: 1%;
+    }
+    .new-backstock-btn {
+        margin-top: 5%;
+    }
+    .index-header {
+        font-size: 3rem;
+        margin-top: 10%;
+    }
+    h3 {
+        font-size: 1.5rem;
+    }
+    .shelf-img {
+        min-width: 200px;
+    }
+    .index-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .login-container {
+        margin-top: 30%;
+    }
+    .currentInfo-card {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 644px){
+    table, #myInput::placeholder {
+        font-size: .8rem;
+    }    
+    #newBackstockCancel, #newBackstockSubmit {
+        width: 25vw;
+    }
+}
+
+@media screen and (max-width: 526px){
+    .restock-mobile-hide {
+        display: none;
+    }
+    .restock-mobile-show {
+        display: inline;
+    }
+    table {
+        font-size: .7rem;
+    }
+    thead {
+        font-size: .65rem;
+    }
+    i {
+        font-size: .9rem;
+    }
+    .logo {
+        width: 75%;
+    }
+    .index-left {
+        width: 75%;
+    }
+    .index-header {
+        margin-top: 10%;
+    }
+    #newBackstockCancel, #newBackstockSubmit {
+        width: 30vw;
+    }
+    .currentInfo-card {
+        width: 95%;
+    }
+}
+@media screen and (max-width: 370px) {
+    .logout-btn {
+        font-size: .6rem;
+    }
+}

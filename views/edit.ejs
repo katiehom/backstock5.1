@@ -1,0 +1,117 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+
+<body>
+    <div class="container input-container mt-3 col-lg-8">
+        <h2 class="text-center">Edit Backstock Item Info</h2>
+        <form id="backstockForm">
+            <div class="form-floating mb-3">
+                <select class="form-select shadow text-center" id="floatingCategory" required name="category">
+                    <option value="" disabled>Select One...</option>
+                    <option value="Frozen" <% if(item.category == "Frozen"){ %> selected <% } %> > Frozen </option>
+                    <option value="Health & Beauty" <% if(item.category == "Health & Beauty"){ %> selected <% } %> >Health & Beauty</option>
+                    <option value="Household & Cleaning" <% if(item.category == "Household & Cleaning"){ %> selected <% } %> >Household & Cleaning</option>
+                    <option value="Pantry" <% if(item.category == "Pantry"){ %> selected <% } %> >Pantry</option>
+                    <option value="Refrigerated" <% if(item.category == "Refrigerated"){ %> selected <% } %> >Refrigerated</option>
+                    <option value="Shoes & Clothing" <% if(item.category == "Shoes & Clothing"){ %> selected <% } %> >Shoes & Clothing</option>
+                    <option value="Toys" <% if(item.category == "Toys"){ %> selected <% } %> >Toys</option>
+                    <option value="Other" <% if(item.category == "Other"){ %> selected <% } %> >Other</option>
+                </select>
+                <label for="floatingCategory">Category *</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control shadow text-center" id="floatingBrand" placeholder="Brand" name='brand' value="<%= item.brand %>">
+                <label for="floatingBrand">Brand *</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" required class="form-control shadow text-center" id="floatingDescription" placeholder="Description" name='description' value="<%= item.description %>">
+                <label for="floatingDescription">Description *</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control shadow text-center" id="floatingLocation" placeholder="Storage Location" name='storageLocation' value="<%= item.storageLocation %>">
+                <label for="floatingLocation">Storage Location</label>
+            </div>
+            <div class="d-flex justify-content-center quantity-row">
+                <div class="quantity-increment d-inline-flex align-items-center justify-content-center col">
+                    <div class="minus">
+                        <i class="fa fa-minus-circle" id="quantityMinus"></i>
+                    </div>
+                    <div class="form-floating mb-3 col-5">
+                        <input type="number" required min="0" value="<%= item.quantity %>"step="1" class="form-control shadow quantity-input text-center" id="floatingQuantity" placeholder="Quantity" name='quantity'>
+                        <label for="floatingQuantity"> Quantity *</label>
+                    </div>
+                    <div class="plus">
+                        <i class="fa fa-plus-circle" id="quantityPlus"></i>
+                    </div>
+                </div>
+                <div class="quantity-increment d-inline-flex align-items-center justify-content-center col">
+                    <div class="minus">
+                        <i class='fa fa-minus-circle' id="idealQuantityMinus"></i>
+                    </div>
+                    <div class="form-floating mb-3 col-5">
+                        <input type="number" required min="0" value="<%= item.idealQuantity %>" step="1" class="form-control shadow quantity-input text-center" id="floatingIdealQuantity" placeholder="Ideal Quantity" name='idealQuantity' class="hidden">
+                        <label for="floatingIdealQuantity">Ideal Quantity *</label>
+                    </div>
+                    <div class="plus">
+                        <i class='fa fa-plus-circle' id="idealQuantityPlus"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control shadow text-center" id="floatingSize" placeholder="Size" name='size' value="<%= item.size %>">
+                <label for="floatingSize">Size</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control shadow text-center" id="floatingExpirationDate" placeholder="Expiration Date" name='expirationDate' value="<%= item.expirationDate %>">
+                <label for="floatingExpirationDate">Expiration Date</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control text-center shadow" type="text" name="comments" placeholder="Comments" id="floatingComments" style="height: 100px" value="<%= item.comments %>">
+                <label for="floatingComments">Comments</label>
+            </div>
+            <p class="text-white text-center required-text mt-2">* indicates required field</p>
+            <div class="d-flex justify-content-between mt-3 editButtonRow">
+                <div class="d-flex cancelSubmit-container"> 
+                    <a href="/todos" class="btn btn-lg btn-secondary shadow" id="newBackstockCancel">Cancel</a>
+                    <button type="submit" value="Save" id="newBackstockSubmit" class="btn btn-lg btn-primary shadow" formaction="/todos/<%= item._id %>/?_method=PUT" formmethod="POST" form="backstockForm">Submit</button>
+                </div>
+                </form>
+                <!-- Button trigger modal -->
+                <button class="btn btn-danger shadow" type="button" id="newBackstockDelete" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa fa-trash-can"></i>
+                </button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button id="exportRestockBtn" type="submit" class="btn btn-lg shadow" formaction="/restock/exportRestock" formmethod="POST" form="backstockForm">
+                    Add Item to Restock Shopping List
+                </button>
+            </div>
+        </form>
+    </div>
+    
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm: Delete Backstock Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          Are you sure you want to delete this item?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary modal-btn mx-3" data-bs-dismiss="modal">Cancel</button>
+          <form
+            action="/todos/deleteTodo/<%= item.id %>?_method=DELETE"
+            method="POST"
+            class="col-3"
+            >
+            <button type="submit" class="btn btn-outline-danger modal-btn">Delete</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include('partials/footer') %>
